@@ -1,41 +1,36 @@
-import struct
-import pickle
-import cv2
 import socket
-from pyfiglet import Figlet
-import os
+import cv2
+import pickle
+import struct
 
-os.system("clear")
-pyf = Figlet(font='puffy')
-a = pyf.renderText("Video Chat App without Multi-Threading")
-b = pyf.renderText("Client")
-os.system("tput setaf 3")
-print(a)
-# create socket
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#  server ip address here
-host_ip = '127.0.1.1'
-port = 9999
-client_socket.connect((host_ip, port))
+client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+host_ip = '127.0.1.2' 
+port = 1234
+print("Socket Created Successfully")
+
+
+client_socket.connect((host_ip,port))
 data = b""
-metadata_size = struct.calcsize("Q")
-while True:
-    while len(data) < metadata_size:
-        packet = client_socket.recv(4*1024)
-        if not packet:
-            break
-        data += packet
-    packed_msg_size = data[:metadata_size]
-    data = data[metadata_size:]
-    msg_size = struct.unpack("Q", packed_msg_size)[0]
+payload_size = struct.calcsize("Q")
+print("Socket Accepted")
 
+
+while True:
+    while len(data) < payload_size:
+        packet = client_socket.recv(2160) 
+        if not packet: break
+        data+=packet
+    packed_msg_size = data[:payload_size]
+    data = data[payload_size:]
+    msg_size = struct.unpack("Q",packed_msg_size)[0]
+    
     while len(data) < msg_size:
-        data += client_socket.recv(4*1024)
-        frame_data = data[:msg_size]
-        data = data[msg_size:]
-        frame = pickle.loads(frame_data)
-        cv2.imshow("Receiving Video ", frame)
-        key = cv2.waitKey(10)
-        if key == 13:
-            break
+        data += client_socket.recv(2160)
+    frame_data = data[:msg_size]
+    data  = data[msg_size:]
+    frame = pickle.loads(frame_data)
+    cv2.imshow("RECEIVING VIDEO",frame)
+    key = cv2.waitKey(1) & 0xFF
+    if key  == ord('q'):
+        break
 client_socket.close()

@@ -1,41 +1,43 @@
-import struct
-import pickle
-import cv2
 import socket
-from pyfiglet import Figlet
-import os
-os.system("clear")
-pyf = Figlet(font='puffy')
-a = pyf.renderText("Video Chat App without Multi-Threading")
-b = pyf.renderText("Server")
-os.system("tput setaf 3")
-print(a)
-# Socket Create
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host_name = socket.gethostname()
+import cv2
+import pickle
+import struct
+
+
+server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+host_name  = socket.gethostname()
 host_ip = socket.gethostbyname(host_name)
-print('HOST IP:', host_ip)
-port = 9999
-socket_address = (host_ip, port)
-# Socket Bind
+print('HOST IP:',host_ip)
+
+port = 1234
+socket_address = ('127.0.1.2',port)
+print("Socket Created Successfully")
+
+
 server_socket.bind(socket_address)
-# Socket Listen
-server_socket.listen(1)
-print("Listening at:", socket_address)
-# Socket Accept
+print("Socket Bind Successfully")
+
+
+
+server_socket.listen(5)
+print("LISTENING AT:",socket_address)
+
+print("Socket Accept")
+
 while True:
-    client_socket, addr = server_socket.accept()
-    print('Connected to:', addr)
+    client_socket,addr = server_socket.accept()
+    print('GOT CONNECTION FROM:',addr)
     if client_socket:
         vid = cv2.VideoCapture(0)
-
+        
         while(vid.isOpened()):
-            ret, image = vid.read()
-            img_serialize = pickle.dumps(image)
-            message = struct.pack("Q", len(img_serialize))+img_serialize
+            img,frame = vid.read()
+            a = pickle.dumps(frame)
+            message = struct.pack("Q",len(a))+a
             client_socket.sendall(message)
-
-            cv2.imshow('Video from Server', image)
-            key = cv2.waitKey(10)
-            if key == 13:
+            
+		
+            cv2.imshow('TRANSMITTING VIDEO',frame)
+            key = cv2.waitKey(1) & 0xFF
+            if key ==ord('q'):
                 client_socket.close()
