@@ -9,8 +9,8 @@ def server():
     host_ip = socket.gethostbyname(host_name)
     print('HOST IP:',host_ip)
 
-    port = 1234
-    socket_address = ('127.0.1.2',port)
+    port = 1235
+    socket_address = ('192.168.43.6',port)
     print("Socket Created Successfully")
 
 
@@ -30,6 +30,7 @@ def server():
             vid = cv2.VideoCapture(0)
             
             while(vid.isOpened()):
+                print("Server running       |")
                 img,frame = vid.read()
                 a = pickle.dumps(frame)
                 message = struct.pack("Q",len(a))+a
@@ -40,3 +41,4 @@ def server():
                 key = cv2.waitKey(1) & 0xFF
                 if key ==ord('q'):
                     client_socket.close()
+#server()

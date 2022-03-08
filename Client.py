@@ -6,18 +6,19 @@ import struct
 
 def client():
     client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    host_ip = '127.0.1.2' 
+    host_ip_server = '192.168.43.162' 
     port = 1234
     print("Socket Created Successfully")
 
 
-    client_socket.connect((host_ip,port))
+    client_socket.connect((host_ip_server,port))
     data = b""
     payload_size = struct.calcsize("Q")
     print("Socket Accepted")
 
 
     while True:
+        print("CLIENT:")
         while len(data) < payload_size:
             packet = client_socket.recv(2160) 
             if not packet: break
@@ -36,3 +37,4 @@ def client():
         if key  == ord('q'):
             break
     client_socket.close()
+#client()
