@@ -4,14 +4,24 @@
 ---
 ## **Installation Steps**
 
+-Clone Github respository
 
-### Step1:Install Anaconda.Follow these steps https://docs.anaconda.com/anaconda/install/linux/
+### CONDA INSTALL(Linux and Windows)
+    - run conda_install.sh
+```bash 
+    bash ./conda_install.sh
+```
 
-### Step2:clone github repository and run install.sh
-
-```./install.sh```
-
-    All conda packages should start installing.If not try installing python packages separately using
-    pip
-
-
+### LINUX Python3 INSTALL
+    -run install-linux.sh
+```bash
+    bash ./install-linux.sh
+```
+### WINDOWS INSTALL (PowerShell)
+    -Open Powershell in Administrator mode
+    -Navigate to desired folder using cd
+    -then run command
+```bash
+run ./run.ps
+```
+---
