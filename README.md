@@ -22,6 +22,6 @@
     -Navigate to desired folder using cd
     -then run command
 ```bash
-run ./run.ps
+run ./install_windows.ps
 ```
 ---
