@@ -6,7 +6,7 @@ import struct
 
 def client():
     client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    host_ip = '127.0.1.2' 
+    host_ip = '192.168.43.6' 
     port = 1234
     print("Socket Created Successfully")
 

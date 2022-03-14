@@ -10,7 +10,7 @@ def server():
     print('HOST IP:',host_ip)
 
     port = 1234
-    socket_address = ('127.0.1.2',port)
+    socket_address = ('192.168.43.162',port)
     print("Socket Created Successfully")
 
 
