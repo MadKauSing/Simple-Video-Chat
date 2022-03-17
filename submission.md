@@ -10,7 +10,7 @@
 
 ---
 
-### Project title - Simple video chat application using socket programming
+## **Project title - Simple video chat application using socket programming**
 
 ---
 
