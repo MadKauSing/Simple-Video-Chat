@@ -1,44 +1,46 @@
-import socket
-import cv2
-import pickle
-import struct
+# server side program
+# libraries
+import socket  # library to manage socket
+import cv2  # library to capture video
+import pickle  # library to implement 'pickling' ie serialisation of a python object
+import struct  # library to pack and unpack data
+
 
 def server():
-    server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    host_name  = socket.gethostname()
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    host_name = socket.gethostname()
     host_ip = socket.gethostbyname(host_name)
-    print('HOST IP:',host_ip)
+    print("HOST IP:", host_ip)
 
     port = 1235
-    socket_address = ('192.168.43.6',port)
+    socket_address = ("192.168.43.6", port)
     print("Socket Created Successfully")
-
 
     server_socket.bind(socket_address)
     print("Socket Bind Successfully")
 
-
     server_socket.listen(5)
-    print("LISTENING AT:",socket_address)
+    print("LISTENING AT:", socket_address)
 
     print("Socket Accept")
 
     while True:
-        client_socket,addr = server_socket.accept()
-        print('GOT CONNECTION FROM:',addr)
+        client_socket, addr = server_socket.accept()
+        print("GOT CONNECTION FROM:", addr)
         if client_socket:
             vid = cv2.VideoCapture(0)
-            
-            while(vid.isOpened()):
+
+            while vid.isOpened():
                 print("Server running       |")
-                img,frame = vid.read()
+                img, frame = vid.read()
                 a = pickle.dumps(frame)
-                message = struct.pack("Q",len(a))+a
+                message = struct.pack("Q", len(a)) + a
                 client_socket.sendall(message)
-                
-            
-                cv2.imshow('TRANSMITTING VIDEO',frame)
+
+                cv2.imshow("TRANSMITTING VIDEO", frame)
                 key = cv2.waitKey(1) & 0xFF
-                if key ==ord('q'):
+                if key == ord("q"):
                     client_socket.close()
-#server()
+
+
+# server()
