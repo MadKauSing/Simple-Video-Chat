@@ -202,10 +202,10 @@ def client():
 
 ### Peer 1
 
-![](/Simple-Video-Chat/ss1.PNG)
+![](./ss1.png)
 
 ### Peer 2
 
-![](/Simple-Video-Chat/ss2.PNG)
-
+![](./ss2.png)
+---
 ---
