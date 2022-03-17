@@ -1,14 +1,12 @@
-# Computer Networks - UE20CS253
+# **Computer Networks - UE20CS253**
 
 ## Assignment - Socket programming
 
 ---
 
-### Bhavini Madhuranath - PES2UG20CS088
-
-### Ayush Singh - PES2UG20CS081
-
-### Ayushmaan Kaushik - PES2UG20CS082
+    Ayush Singh         - PES2UG20CS081
+    Bhavini Madhuranath - PES2UG20CS088
+    Ayushmaan Kaushik   - PES2UG20CS082
 
 ---
 
