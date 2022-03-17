@@ -1,3 +1,4 @@
+#!/bin/bash
 conda create --name Video-app python=3.9
 conda activate Video-app
 
