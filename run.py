@@ -8,7 +8,7 @@ from time import sleep
 
 if __name__ == '__main__':
     Process(target=Server.server).start()
-    sleep(3);
+    sleep(5)
     Process(target=Client.client).start()
 
     
